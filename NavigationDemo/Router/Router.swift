@@ -2,7 +2,7 @@
 //  Router.swift
 //  NavigationDemo
 //
-//  Created by Jonathan Parker on 4/7/23.
+//  Created by Jonathan Parker on 11/18/23.
 //
 
 import SwiftUI
@@ -12,9 +12,9 @@ public final class Router: ObservableObject {
     /// The current navigation stack.
     @Published var path = NavigationPath()
     /// Identifier used to display a sheet in the current context.
-    @Published var sheetItem: CoverItem?
+    @Published var sheetItem: CoverIdentifier?
     /// Identifier used to display a coer in the current context.
-    @Published var coverItem: CoverItem?
+    @Published var coverItem: CoverIdentifier?
 }
 
 // MARK: Push Operations
@@ -38,9 +38,9 @@ extension Router {
 extension Router {
     
     /// Removes a given number of `Hashable`s from the navigation stack (back navigation).
-    /// - Parameter numberToPop: The amount of `Hashable` identifiers to be removed. Defaults to 1.
-    public func pop(_ numberToPop: Int = 1) {
-        path.removeLast(numberToPop)
+    /// - Parameter viewsToPop: The amount of `Hashable` identifiers to be removed. Defaults to 1.
+    public func pop(_ viewsToPop: Int = 1) {
+        path.removeLast(viewsToPop)
     }
     
     /// Removes all items from the navigation stack and returns to the root view.
@@ -50,9 +50,9 @@ extension Router {
 }
 
 /// A `Hashable`, `Identifiable` identifier used to display cover or sheet items.
-public enum CoverItem: Hashable, Identifiable {
-    case sheet
-    case coverage
+public enum CoverIdentifier: Hashable, Identifiable {
+    case sheetItem
+    case coverItem
     
     public var id: String {
         String(describing: self)
